@@ -16,7 +16,7 @@ public class PositionManager {
         positionTable = new HashMap();
     }
 
-    public void updatePosition( Order order ) {
+    public void updatePosition( final Order order ) {
         final long userId = order.getUserId();
         Position position = positionTable.get( userId );
         if ( position == null ) {

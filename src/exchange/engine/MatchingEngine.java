@@ -13,7 +13,7 @@ public class MatchingEngine {
     OrderBook orderBook;
     PositionManager positionManager;
 
-    public MatchingEngine( OrderBook orderBook, PositionManager positionManager ) {
+    public MatchingEngine( final OrderBook orderBook, final PositionManager positionManager ) {
         this.orderBook = orderBook;
         this.positionManager = positionManager;
     }
@@ -33,7 +33,7 @@ public class MatchingEngine {
      * @param buyOrderItr
      * @param buyOrder
      */
-    private void fillOrder( ListIterator<Order> buyOrderItr, Order buyOrder ) {
+    private void fillOrder( final ListIterator<Order> buyOrderItr, final Order buyOrder ) {
         List<Order> sellOrderList = orderBook.getSellOrderTable().get( buyOrder.getPrice() );
         if( sellOrderList == null ) return;
         ListIterator<Order> sellOrderItr = sellOrderList.listIterator();
@@ -58,7 +58,7 @@ public class MatchingEngine {
         }
     }
 
-    private void transformOrderToPosition( ListIterator<Order> itr, Order filledOrder, Order partiallyFilledOrder, long partialFillQuantity ) {
+    private void transformOrderToPosition( final ListIterator<Order> itr, final Order filledOrder, final Order partiallyFilledOrder, final long partialFillQuantity ) {
         positionManager.updatePosition( filledOrder );
         partiallyFilledOrder.setFilledQuantity( partialFillQuantity );
         itr.remove();

@@ -8,7 +8,7 @@ public class Order extends OrderRequest {
     private String id;
     private long filledQuantity;
 
-    public Order( String newId, OrderRequest orderRequest ) {
+    public Order( final String newId, final OrderRequest orderRequest ) {
         super( orderRequest );
         id = newId;
     }

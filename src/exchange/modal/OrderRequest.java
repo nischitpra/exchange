@@ -12,7 +12,7 @@ public class OrderRequest {
     private long quantity;
     private OrderType type;
 
-    public OrderRequest( long userId, long price, long quantity, OrderType type ) {
+    public OrderRequest( final long userId, final long price, final long quantity, final OrderType type ) {
         this.userId = userId;
         this.price = price;
         this.quantity = quantity;

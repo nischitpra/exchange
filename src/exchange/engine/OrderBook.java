@@ -20,7 +20,7 @@ public class OrderBook {
         sellOrderTable = new HashMap<>();
     }
 
-    public void placeOrder( OrderRequest orderRequest ) {
+    public void placeOrder( final OrderRequest orderRequest ) {
         if ( orderRequest.getType() == OrderType.Buy ) {
             addToOrderTable( orderRequest, buyOrderTable );
         }
@@ -38,7 +38,7 @@ public class OrderBook {
         }
     }
 
-    private String generateId( OrderType type, long price, int size ) {
+    private String generateId( final OrderType type, final long price, final int size ) {
         StringBuilder id = new StringBuilder();
         id.append( type.getValue() );
         id.append( price );
@@ -47,7 +47,7 @@ public class OrderBook {
         return id.toString();
     }
 
-    private void addToOrderTable( OrderRequest orderRequest, HashMap<Long, List<Order>> orderTable ) {
+    private void addToOrderTable( final OrderRequest orderRequest, final HashMap<Long, List<Order>> orderTable ) {
         List<Order> orderList = orderTable.get( orderRequest.getPrice() );
         if ( orderList == null ) orderList = new ArrayList<>();
         orderTable.put( orderRequest.getPrice(), orderList );
@@ -55,7 +55,7 @@ public class OrderBook {
         orderTable.get( newOrder.getPrice() ).add( newOrder );
     }
 
-    private void cancelOrder( Order cancelOrder, HashMap<Long, List<Order>> orderTable ) {
+    private void cancelOrder( final Order cancelOrder, final HashMap<Long, List<Order>> orderTable ) {
         List<Order> orderList = orderTable.get( cancelOrder.getPrice() );
         for ( Order order : orderList ) {
             if ( order.getId() == cancelOrder.getId() ) {

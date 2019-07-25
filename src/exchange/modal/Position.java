@@ -12,7 +12,7 @@ public class Position {
     private long totalBuyQuantity;
     private long totalSellQuantity;
 
-    public void fillByOrder( Order order ) {
+    public void fillByOrder( final Order order ) {
         userId = order.getUserId();
         switch ( order.getType() ) {
             case Buy:
@@ -26,7 +26,7 @@ public class Position {
         }
     }
 
-    private long getAveragePrice( long averagePrice, long totalQuantity, long fillPrice, long fillQuantity ) {
+    private long getAveragePrice( final long averagePrice, final long totalQuantity, final long fillPrice, final long fillQuantity ) {
         return ( averagePrice * totalQuantity + fillPrice * fillQuantity ) / ( totalQuantity + fillQuantity );
     }
 
