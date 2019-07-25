@@ -1,6 +1,6 @@
-package something.modal;
+package exchange.modal;
 
-import something.enums.OrderType;
+import exchange.enums.OrderType;
 
 /**
  * Created by nischitpradhan on 2019-07-25
@@ -10,7 +10,7 @@ public class OrderRequest {
     private long userId;
     private long price;
     private long quantity;
-    private OrderType type; // 1 for buy -1 for sell
+    private OrderType type;
 
     public OrderRequest( long userId, long price, long quantity, OrderType type ) {
         this.userId = userId;

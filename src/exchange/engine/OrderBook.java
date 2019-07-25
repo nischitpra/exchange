@@ -1,14 +1,11 @@
-package something.engine;
+package exchange.engine;
 
-import something.enums.OrderType;
-import something.modal.Order;
-import something.modal.OrderRequest;
-import something.util.Logger;
+import exchange.enums.OrderType;
+import exchange.modal.Order;
+import exchange.modal.OrderRequest;
+import exchange.util.Logger;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by nischitpradhan on 2019-07-25
@@ -41,12 +38,13 @@ public class OrderBook {
         }
     }
 
-    private long generateId( OrderType type, long price, int size ) {
+    private String generateId( OrderType type, long price, int size ) {
         StringBuilder id = new StringBuilder();
         id.append( type.getValue() );
         id.append( price );
         id.append( size );
-        return Long.parseLong( id.toString() );
+        id.append( new Date().getTime() );
+        return id.toString();
     }
 
     private void addToOrderTable( OrderRequest orderRequest, HashMap<Long, List<Order>> orderTable ) {
@@ -66,10 +64,6 @@ public class OrderBook {
         }
     }
 
-    private void moveToActiveOrder( ) {
-//TODO:
-    }
-
     public HashMap<Long, List<Order>> getBuyOrderTable() {
         return buyOrderTable;
     }
@@ -81,11 +75,11 @@ public class OrderBook {
     public void log() {
         Set<Long> buyKeyList = buyOrderTable.keySet();
         for ( Long key : buyKeyList ) {
-            Logger.log( "key: %d, buy size: %d", key, buyOrderTable.get( key ).size() );
+            Logger.log( "BUY price: %d, orders: %d", key, buyOrderTable.get( key ).size() );
         }
         Set<Long> sellKeyList = sellOrderTable.keySet();
         for ( Long key : sellKeyList ) {
-            Logger.log( "key: %d, sell size: %d", key, sellOrderTable.get( key ).size() );
+            Logger.log( "SELL price: %d, orders: %d", key, sellOrderTable.get( key ).size() );
         }
     }
 

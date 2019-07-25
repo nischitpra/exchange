@@ -1,4 +1,4 @@
-package something.enums;
+package exchange.enums;
 
 /**
  * Created by nischitpradhan on 2019-07-25
