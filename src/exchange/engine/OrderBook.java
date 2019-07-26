@@ -49,7 +49,7 @@ public class OrderBook {
 
     private void addToOrderTable( final OrderRequest orderRequest, final HashMap<Long, List<Order>> orderTable ) {
         List<Order> orderList = orderTable.get( orderRequest.getPrice() );
-        if ( orderList == null ) orderList = new ArrayList<>();
+        if ( orderList == null ) orderList = new LinkedList<>();
         orderTable.put( orderRequest.getPrice(), orderList );
         Order newOrder = new Order( generateId( orderRequest.getType(), orderRequest.getPrice(), orderList.size() ), orderRequest );
         orderTable.get( newOrder.getPrice() ).add( newOrder );
