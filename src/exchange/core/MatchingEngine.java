@@ -1,4 +1,4 @@
-package exchange.engine;
+package exchange.core;
 
 import exchange.modal.Order;
 import exchange.util.Logger;
@@ -10,6 +10,7 @@ import java.util.ListIterator;
  * Created by nischitpradhan on 2019-07-25
  */
 public class MatchingEngine {
+
     OrderBook orderBook;
     PositionManager positionManager;
 
@@ -30,12 +31,13 @@ public class MatchingEngine {
 
     /**
      * worst complexity is n^2.
+     *
      * @param buyOrderItr
      * @param buyOrder
      */
     private void fillOrder( final ListIterator<Order> buyOrderItr, final Order buyOrder ) {
         List<Order> sellOrderList = orderBook.getSellOrderTable().get( buyOrder.getPrice() );
-        if( sellOrderList == null ) return;
+        if ( sellOrderList == null ) return;
         ListIterator<Order> sellOrderItr = sellOrderList.listIterator();
         while ( sellOrderItr.hasNext() ) {
             Order sellOrder = sellOrderItr.next();
@@ -63,4 +65,5 @@ public class MatchingEngine {
         partiallyFilledOrder.setFilledQuantity( partialFillQuantity );
         itr.remove();
     }
+
 }

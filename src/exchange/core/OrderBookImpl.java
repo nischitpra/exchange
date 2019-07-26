@@ -1,4 +1,4 @@
-package exchange.engine;
+package exchange.core;
 
 import exchange.enums.OrderType;
 import exchange.modal.Order;
@@ -10,15 +10,9 @@ import java.util.*;
 /**
  * Created by nischitpradhan on 2019-07-25
  */
-public class OrderBook {
+public class OrderBookImpl implements OrderBook {
 
-    private HashMap<Long, List<Order>> buyOrderTable;
-    private HashMap<Long, List<Order>> sellOrderTable;
-
-    public OrderBook() {
-        buyOrderTable = new HashMap<>();
-        sellOrderTable = new HashMap<>();
-    }
+    public OrderBookImpl() {}
 
     public void placeOrder( final OrderRequest orderRequest ) {
         if ( orderRequest.getType() == OrderType.Buy ) {
@@ -38,7 +32,7 @@ public class OrderBook {
         }
     }
 
-    private String generateId( final OrderType type, final long price, final int size ) {
+    public String generateId( final OrderType type, final long price, final int size ) {
         StringBuilder id = new StringBuilder();
         id.append( type.getValue() );
         id.append( price );

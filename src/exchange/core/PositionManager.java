@@ -1,4 +1,4 @@
-package exchange.engine;
+package exchange.core;
 
 import exchange.modal.Order;
 import exchange.modal.Position;

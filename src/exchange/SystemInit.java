@@ -1,8 +1,9 @@
 package exchange;
 
-import exchange.engine.MatchingEngine;
-import exchange.engine.OrderBook;
-import exchange.engine.PositionManager;
+import exchange.core.MatchingEngine;
+import exchange.core.OrderBook;
+import exchange.core.OrderBookImpl;
+import exchange.core.PositionManager;
 import exchange.enums.OrderType;
 import exchange.modal.OrderRequest;
 import exchange.util.Logger;
@@ -13,15 +14,21 @@ import java.util.Date;
 import java.util.Random;
 
 class SystemInit {
-    public SystemInit() {}
+    
+    private OrderBook orderBook;
+    private PositionManager positionManager;
+    private MatchingEngine matchingEngine;
+
+    public SystemInit() {
+        orderBook = new OrderBookImpl();
+        positionManager = new PositionManager();
+        matchingEngine = new MatchingEngine( orderBook, positionManager );
+    }
 
     public void init() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-        OrderBook orderBook = new OrderBook();
-        PositionManager positionManager = new PositionManager();
-        MatchingEngine matchingEngine = new MatchingEngine( orderBook, positionManager );
-        run( this.getClass().getMethod( "createOrders", OrderBook.class ), this, orderBook );
+        run( this.getClass().getMethod( "createOrders", OrderBookImpl.class ), this, orderBook );
         run( MatchingEngine.class.getMethod( "run" ), matchingEngine );
-        run( OrderBook.class.getMethod( "log" ), orderBook );
+        run( OrderBookImpl.class.getMethod( "log" ), orderBook );
         run( PositionManager.class.getMethod( "log" ), positionManager );
     }
 
@@ -33,7 +40,7 @@ class SystemInit {
         Logger.log( "run time: %fs", ( end - start ) / 1000.0 );
     }
 
-    public void createOrders( OrderBook orderBook ) {
+    public void createOrders( OrderBookImpl orderBook ) {
         Random randomId = new Random();
         for ( int i = 0; i < 2000000; i++ ) {
             OrderRequest orderRequest = new OrderRequest( randomId.nextInt( 2 ) + 1, getRandomPrice(), getRandomQuantity(), getRandomOrderType() );
@@ -63,4 +70,5 @@ class SystemInit {
         }
         return OrderType.Sell;
     }
+
 }
