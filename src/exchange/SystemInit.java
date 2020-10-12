@@ -14,7 +14,7 @@ import java.util.Date;
 import java.util.Random;
 
 class SystemInit {
-    
+
     private OrderBook orderBook;
     private PositionManager positionManager;
     private MatchingEngine matchingEngine;
@@ -26,6 +26,16 @@ class SystemInit {
     }
 
     public void init() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+// test to debug matching engine
+//        OrderRequest orderRequest = new OrderRequest( 1, 101, 20, OrderType.Buy );
+//        orderBook.placeOrder( orderRequest );
+//        orderRequest = new OrderRequest( 2, 101, 15, OrderType.Sell );
+//        orderBook.placeOrder( orderRequest );
+//        ((OrderBookImpl)orderBook).log();
+//        matchingEngine.run();
+//        ((OrderBookImpl)orderBook).log();
+//        positionManager.log();
+// actual code to test matching engine
         run( this.getClass().getMethod( "createOrders", OrderBookImpl.class ), this, orderBook );
         run( MatchingEngine.class.getMethod( "run" ), matchingEngine );
         run( OrderBookImpl.class.getMethod( "log" ), orderBook );

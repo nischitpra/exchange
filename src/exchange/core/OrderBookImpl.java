@@ -69,10 +69,12 @@ public class OrderBookImpl implements OrderBook {
     public void log() {
         Set<Long> buyKeyList = buyOrderTable.keySet();
         for ( Long key : buyKeyList ) {
+//            Logger.log( "BUY price: %d, orders: %d, items: %s", key, buyOrderTable.get( key ).size(), buyOrderTable.get( key ).toString() );
             Logger.log( "BUY price: %d, orders: %d", key, buyOrderTable.get( key ).size() );
         }
         Set<Long> sellKeyList = sellOrderTable.keySet();
         for ( Long key : sellKeyList ) {
+//            Logger.log( "SELL price: %d, orders: %d, items: %s", key, sellOrderTable.get( key ).size(), sellOrderTable.get( key ).toString() );
             Logger.log( "SELL price: %d, orders: %d", key, sellOrderTable.get( key ).size() );
         }
     }

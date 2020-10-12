@@ -35,4 +35,8 @@ public class Order extends OrderRequest {
         }
     }
 
+    @Override
+    public String toString() {
+        return String.format("(id: %s, qty: %d)", id, getQuantity() - filledQuantity );
+    }
 }
